@@ -22,7 +22,21 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blue: 10px;
+    }
 
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -45,8 +59,19 @@
     }
   </style>
 
-  <script>
-  </script>
+<script>
+  const inputs = document.querySelectorAll('.controls input');
+  
+  function handleUpdate () {
+    // What is the suffix of the value we're working with? data- atttribute allows for adding a suffix value to things like hex codes
+    const suffix = this.dataset.sizing || ''; //datase is an object that will contain all of the data attributes from that specific element
+    document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+  }
+
+  inputs.forEach(input => input.addEventListener('change', handleUpdate));
+  inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
+</script>
 
 </body>
 </html>
